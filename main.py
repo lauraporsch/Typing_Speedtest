@@ -19,7 +19,7 @@ def random_word(event):
     """gets a random word from the wordlist and returns it as word to type"""
     global displayed_words, word_list, user_words
     if event == "<Button>":
-        start_timer(15)
+        start_timer(60)
     # set cursor in text box
     text_box.focus()
     word_to_type = random.choice(word_list)
@@ -29,11 +29,9 @@ def random_word(event):
     words_canvas.itemconfig(to_type, text=word_to_type)
     displayed_words.append(word_to_type)
     # if first word is displayed, no text input to get yet
-    if event != "<Button>":
+    if event.keysym:
         typed_word = text_box.get("1.0", END).lower()
         user_words.append(typed_word)
-    print(displayed_words)
-    print(user_words)
     text_box.delete("1.0", END)
     # hinders the return key to call a line break in text box
     return "break"
